@@ -25,8 +25,9 @@ app.get('/', (req, res, next) => {
 })
 
 // 모든 data를 조회
-app.get('/api/trafficInfo', (req, res, next) => {
-  CarValue.find().all()
+app.get('/api/traffic-infos', (req, res, next) => {
+  CarValue.find()
+  .all()
   .then((data) => {
     return res.status(200).json(data)
   })
@@ -38,5 +39,33 @@ app.get('/api/trafficInfo', (req, res, next) => {
     })
   })
 });
+
+// client에서 지정한 속도범위 내의 data를 조회
+app.get('/api/traffic-infos/speed', (req, res, next) => { 
+  
+  if(req.query.minSpeed === '' || req.query.maxSpeed === ''){
+    res.status(400).json({
+      success: false,
+      emsg: 'no requiredSpeed'
+    })
+  }
+
+  CarValue.find()
+  .where('carSpeed').gte(Number(req.query.minSpeed)).lte(Number(req.query.maxSpeed))
+  .then((data) => {
+    if(data.length === 0) {
+      return res.status(200).send('No match data')
+    }
+    return res.status(200).json(data)
+  })
+  .catch(() => {
+    return res.status(400).json({
+      success: false,
+      emsg: 'failed to load data from db'
+    })
+  })
+});
+
+
 
 app.listen(8080);
