@@ -6,15 +6,19 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server/app.js"
+    "start": "nodemon server/server.js",
+    "capstone": "concurrently \"npm run start\" \"npm run start --prefix client\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.20.0",
+    "concurrently": "^7.3.0",
     "cors": "^2.8.5",
     "express": "^4.18.1",
-    "jquery": "^3.6.0"
+    "jquery": "^3.6.0",
+    "mongoose": "^6.5.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.19"
