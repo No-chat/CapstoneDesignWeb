@@ -1,20 +1,13 @@
+// params가 아닌 req header에서 예 / 아니오 여부 확인
 const deleteCheck = (req, res, next) => {
-  const isDeleted = req.params.isDeleted
-
-  switch(isDeleted) {
-    case 'false':
-      return res.json({
-        success : false
-      })
-    case 'true':
-      next();
-      break
-    default:
-      return res.status(400).json({
-        success : false,
-        emsg : 'Wrong parameter!'
-      })
+  //const isDeleted = req.params.isDeleted
+  const isDeleted = req.body.isDeleted
+  if(!isDeleted) {
+    return res.json({
+      success : false
+    })
   }
+  next();
 }
 
 
