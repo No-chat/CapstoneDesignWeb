@@ -42,8 +42,9 @@ app.get('/api/traffic-infos', (req, res, next) => {
 
 // client에서 지정한 속도범위 내의 data를 조회
 app.get('/api/traffic-infos/speed', (req, res, next) => { 
-  
-  if(req.query.minSpeed === '' || req.query.maxSpeed === ''){
+  const minSpeed = Number(req.query.minSpeed)
+  const maxSpeed = Number(req.query.maxSpeed)
+  if(minSpeed === '' || maxSpeed === ''){
     res.status(400).json({
       success: false,
       emsg: 'no requiredSpeed'
@@ -51,7 +52,7 @@ app.get('/api/traffic-infos/speed', (req, res, next) => {
   }
 
   CarValue.find()
-  .where('carSpeed').gte(Number(req.query.minSpeed)).lte(Number(req.query.maxSpeed))
+  .where('carSpeed').gte(Number(minSpeed)).lte(Number(maxSpeed))
   .then((data) => {
     if(data.length === 0) {
       return res.status(200).send('No match data')
@@ -65,6 +66,28 @@ app.get('/api/traffic-infos/speed', (req, res, next) => {
     })
   })
 });
+
+// client에서 체크된 _id값에 해당되는 값을 보내주면 그에 맞는 데이터를 db에서 삭제해준다
+app.delete('/api/traffic-infos/:_id', (req, res, next) => {
+  const deleteId = req.params._id
+
+  CarValue.deleteOne()
+  .where('_id').equals(deleteId)
+  .then(() => {
+    return res.status(200).json({
+      success : true,
+      msg : 'deleting data complete'
+    })
+  })
+  .catch(() => {
+    return res.status(400).json({
+      success : false,
+      emsg : 'deleting data failed'
+    })
+  })
+  
+});
+
 
 
 
