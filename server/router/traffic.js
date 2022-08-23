@@ -1,13 +1,12 @@
 import express from 'express'
 
 import deleteCheck from "../middleware/deleteCheck.js";
-import * as traffic from '../traffic/trafficrepository.js'
+import { getAllData, getFilteredData, deleteDataById } from '../traffic/trafficrepository.js';
 
 const router = express.Router()
 
-router.get('/',traffic.getAllData)
-router.get('/speed',traffic.getFilteredDataBySpeed)
-router.get('/date', traffic.getFilteredDataByDate)
-router.delete('/_ids', deleteCheck, traffic.deleteDataById)
+router.get('/', getAllData)
+router.get('/filteredData', getFilteredData)
+router.delete('/_ids', deleteCheck, deleteDataById)
 
 export default router;
