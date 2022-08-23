@@ -15,10 +15,20 @@ const getAllData = async (req, res, next) => {
   }
 }
 
-const getFilteredDataBySpeed = async (req, res, next) => {
-  const {minSpeed, maxSpeed} = req.query;
+const getFilteredData = async (req, res, next) => {
+  const {minSpeed, maxSpeed, startDate, endDate} = req.query;
   try{
-    const result = await CarValue.find().where('carSpeed').gte(Number(minSpeed)).lte(Number(maxSpeed))
+    let result
+    if(startDate === undefined || endDate === undefined) {
+      result = await CarValue.find().where('carSpeed').gte(Number(minSpeed)).lte(Number(maxSpeed))
+    } else if(minSpeed === undefined || maxSpeed === undefined) {
+      
+      result = await CarValue.find().where('date').gte(startDate).lte(endDate)
+    } else {
+      result = await CarValue.find()
+      .where('carSpeed').gte(Number(minSpeed)).lte(Number(maxSpeed))
+      .where('date').gte(startDate).lte(endDate)
+    }
     if (result.length === 0) {
       return res.status(400).json({
         success : false,
@@ -33,15 +43,6 @@ const getFilteredDataBySpeed = async (req, res, next) => {
       emsg: 'Failed to load data from db',
       errlog : e
     })
-  }
-}
-
-const getFilteredDataByDate = async (req, res, next) => {
-  try{
-
-  }
-  catch(e) {
-
   }
 }
 
@@ -68,7 +69,6 @@ const deleteDataById = async (req, res, next) => {
 
 export {
   getAllData,
-  getFilteredDataBySpeed,
-  getFilteredDataByDate,
+  getFilteredData,
   deleteDataById
 }
