@@ -1,0 +1,41 @@
+.table_div {
+  display: flex;
+  justify-content: center;
+  overflow: auto;
+  margin-left: 10vw;
+  margin-right: 10vw;
+}
+
+.table_div::-webkit-scrollbar {
+  width: 5px;
+}
+
+.table_div::-webkit-scrollbar-thumb {
+  background-color: grey;
+}
+
+.table_div::-webkit-scrollbar-track {
+  background-color: lightgrey;
+}
+
+.table_table {
+  border-collapse: collapse; 
+  width: 80%;
+}
+
+.table_thead {
+  position: sticky;
+  top: 0px;
+}
+
+.table_th {
+  background-color: white;
+  border-bottom: 1px solid;
+  text-align: center;
+}
+.table_td {
+  border-right: 1px solid;
+  border-bottom: 1px solid;
+  padding: 10px;
+  text-align: center;
+}

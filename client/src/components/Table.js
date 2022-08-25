@@ -6,14 +6,14 @@ import { useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faSpinner} from '@fortawesome/free-solid-svg-icons'
 import "react-datepicker/dist/react-datepicker.css";
-import styled from 'styled-components'
+import '../styles/table.css'
 
 // Components
 import TableRow from "./TableRow";
 
 // URI, Table HEADER
 const TRAFFIC_URI = 'http://localhost:8080/api/traffic-infos';
-const HEADER = ['날짜', '차량 번호', '속력'];
+const HEADER = ['날짜', '차량 번호', '속력', '조건'];
 
 export default function Table() {
   const [loading, setLoading] = useState(false)
@@ -35,44 +35,28 @@ export default function Table() {
 
   return(
     <>
-      <StyledDiv>
-        <div>
-        {loading && <FontAwesomeIcon icon={faSpinner} size={"5x"} pulse />}
+      
+        <div className="table_div">
+        {loading && <FontAwesomeIcon icon={faSpinner} size={"5x"} pulse style={{marginTop: "60px"}} />}
         {!loading && (
-          <StyledTable>
-            <table>
-              <thead>
-                <tr>
-                  {HEADER.map(d => <th>{d}</th>)}
-                </tr>
-              </thead>
-              <tbody>
-                {tableData.map((data) => {
-                  return (
-                    <TableRow id = {data._id} data = {data} />
-                  )
-                })}
-              </tbody>
-            </table>
-          </StyledTable>
+          <table className="table_table">
+            <thead className="table_thead">
+              <tr>
+                {HEADER.map(d => <th className="table_th">{d}</th>)}
+              </tr>
+            </thead>
+            <tbody>
+              {tableData.map((data) => {
+                return (
+                  <TableRow id = {data._id} data = {data} />
+                )
+              })}
+            </tbody>
+          </table>        
         )}
         </div>
-      </StyledDiv>
+      
     </>
   )
 }
 
-const StyledTable = styled.table`
-  border-collapse: collapse;
-  border-bottom: 3px solid black;
-  margin: auto;
-  margin-top: 20px; 
-  height: 50%;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-`
-const StyledDiv = styled.div`
-  width: 500px;
-  height: 500px;
-`
