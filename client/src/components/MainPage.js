@@ -3,7 +3,8 @@ import React, {useState, useEffect} from "react";
 // Styling
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faList, faArrowRotateLeft} from '@fortawesome/free-solid-svg-icons'
-import styled from "styled-components";
+import '../styles/button.css'
+import '../styles/main.css'
 
 // Components
 import NavBar from "./NavBar";
@@ -42,33 +43,17 @@ export default function MainPage() {
   return(
     <>
       <header></header>
-      <StyledNav>
-        <nav>
-          <FontAwesomeIcon icon={faList} onClick={showFilter} size={"3x"} />
-          {isShowFilter && <NavBar />}
-          <FontAwesomeIcon icon={faArrowRotateLeft} size={"3x"} onClick={reload} />
-        </nav>
-      </StyledNav>
-      <StyledMain>
-        <main>
-          <div>{'최근 업데이트: '+makeDateFormat(new Date())}</div>  
-          <Table />
-        </main>
-      </StyledMain>
+      <nav className="main_nav">
+        <FontAwesomeIcon icon={faList} onClick={showFilter} size={"3x"} className='btn' />
+        {isShowFilter && <NavBar />}
+        <FontAwesomeIcon icon={faArrowRotateLeft} size={"3x"} onClick={reload} className='btn' />
+      </nav>
+      <main className="main_main">
+        <div className='main_div'>{'최근 업데이트: '+makeDateFormat(new Date())}</div>  
+        <Table />
+      </main>
       <footer></footer>
     </>
   )
 }
 
-const StyledNav = styled.nav`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-`
-
-const StyledMain = styled.main`
-  display: flex;
-  
-  
-  justify-content: center;
-`
