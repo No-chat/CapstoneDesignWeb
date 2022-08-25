@@ -3,7 +3,7 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 
 // Styling
 import "react-datepicker/dist/react-datepicker.css";
-import "./styles/reset.css"
+
 
 // Components
 import MainPage from './components/MainPage';
@@ -11,10 +11,8 @@ import MainPage from './components/MainPage';
 
 
 function App() {
-
-  
   return (
-    <div className="App">
+    <div style={{width: '100%', height: '100%'}}>
       <Router>
         <Routes>
           <Route exact path='/' element={<MainPage />} />
