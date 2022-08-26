@@ -1,0 +1,19 @@
+.nav_container {
+  position: absolute;
+  top: 13vh;
+  margin-left: 2vw;
+}
+
+.section {
+  display: flex;
+  border-radius: 20px;
+  align-items: center;
+  margin-bottom: 5px;
+  padding: 10px;
+  background-color: whitesmoke;
+}
+
+.nav_cancel {
+  background-color: whitesmoke;
+  border: none;
+}

@@ -5,9 +5,10 @@ import qs from 'qs'
 
 // Styling
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faFilter, faGaugeHigh, faCalenderDays} from '@fortawesome/free-solid-svg-icons'
+import {faSquareXmark, faGaugeHigh, faCalendarDay} from '@fortawesome/free-solid-svg-icons'
 import "react-datepicker/dist/react-datepicker.css";
-import styled from 'styled-components';
+import '../styles/nav.css'
+import '../styles/button.css'
 
 
 
@@ -160,43 +161,45 @@ export default function NavBar() {
 
   return(
     <>
-      <StyledDiv>
-        <div>
-          <section>
+        <div className='nav_container'>
+          <section className='section'>
             <form>
-              <input type='text' value={minSpeed} onChange={({target: {value}}) => {
+              <input type='text' value={minSpeed} required onChange={({target: {value}}) => {
                 handleSpeed(value, 'minSpeed')
               }} />
-              <input type='text' value={maxSpeed} onChange={({target: {value}}) => {
+              <span>-</span>
+              <input type='text' value={maxSpeed} required onChange={({target: {value}}) => {
                 handleSpeed(value, 'maxSpeed')
               }} />
-              <FontAwesomeIcon icon={faFilter} onClick={filtering} type="submit" />
+              <FontAwesomeIcon icon={faGaugeHigh} className='left_margin_btn btn' onClick={filtering} type="submit" />
               
             </form>
           </section>
-          <section>
+          <section className='section'>
             <ReactDatePicker
+              dateFormat="yyyy년 MM월 dd일"
               selected={startDate}
               onSelect={(date) => {
                 handleDate(date, 'startDate')
               }}
             />
+            <span>-</span>
             <ReactDatePicker
+              dateFormat="yyyy년 MM월 dd일"
               selected={endDate}
               onSelect={(date) => {
                 handleDate(date, 'endDate')
               }}
             />
-            <FontAwesomeIcon icon={faFilter} onClick={filtering} />
+            <FontAwesomeIcon icon={faCalendarDay} className='left_margin_btn btn' onClick={filtering} />
+          </section>
+          <section style={{position: 'absolute', width:'100%'}}>
+            {isSpeedFilter && <button className='nav_cancel'>{minSpeed + '-' + maxSpeed}
+            <FontAwesomeIcon icon={faSquareXmark} size={'lg'} onClick={speedFilterCancel} className='left_margin_btn cancel_btn' /></button>}
+            {isDateFilter && <button className='nav_cancel'>{startDate + '-' + endDate}
+            <FontAwesomeIcon icon={faSquareXmark} size={'lg'} onClick={dateFilterCancel} className='left_margin_btn cancel_btn' /></button>}
           </section>
         </div>
-      </StyledDiv>
-      {isSpeedFilter && <button onClick={speedFilterCancel}>{minSpeed + '-' + maxSpeed}</button>}
-      {isDateFilter && <button onClick={dateFilterCancel}>{startDate + '-' + endDate}</button>}
     </>
   )
 }
-
-const StyledDiv = styled.div`
-  position: absolute;
-`

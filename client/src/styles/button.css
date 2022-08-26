@@ -1,0 +1,18 @@
+.btn:hover {
+  transform: scale(1.1);
+  color: #1F0CF7
+}
+
+.left_margin_btn {
+  margin-left: 1vw;
+}
+
+.right_margin_btn {
+  margin-right: 2vw;
+}
+
+.cancel_btn:hover {
+  transform: scale(1.1);
+  color: #FB1515
+}
+
