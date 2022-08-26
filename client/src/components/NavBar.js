@@ -142,7 +142,9 @@ export default function NavBar() {
     filtering(e)
   }
 
-
+  const makeDateFormat = (date) => {
+    return `${date.getFullYear()}년 ${('0' + (date.getMonth() + 1)).slice(-2)}월 ${('0' + date.getDate()).slice(-2)}일`
+  }
 
   useEffect(() => {
     console.log(queryList)
@@ -196,7 +198,7 @@ export default function NavBar() {
           <section style={{position: 'absolute', width:'100%'}}>
             {isSpeedFilter && <button className='nav_cancel'>{minSpeed + '-' + maxSpeed}
             <FontAwesomeIcon icon={faSquareXmark} size={'lg'} onClick={speedFilterCancel} className='left_margin_btn cancel_btn' /></button>}
-            {isDateFilter && <button className='nav_cancel'>{startDate + '-' + endDate}
+            {isDateFilter && <button className='nav_cancel'>{makeDateFormat(startDate) + '-' + makeDateFormat(endDate)}
             <FontAwesomeIcon icon={faSquareXmark} size={'lg'} onClick={dateFilterCancel} className='left_margin_btn cancel_btn' /></button>}
           </section>
         </div>
