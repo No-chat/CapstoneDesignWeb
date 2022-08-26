@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 
 // Styling
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {faSpinner} from '@fortawesome/free-solid-svg-icons'
+import {faSpinner, faFileCircleXmark} from '@fortawesome/free-solid-svg-icons'
 import "react-datepicker/dist/react-datepicker.css";
 import '../styles/table.css'
 
@@ -17,6 +17,7 @@ const HEADER = ['날짜', '차량 번호', '속력', '조건'];
 
 export default function Table() {
   const [loading, setLoading] = useState(false)
+  const [isData, setIsData] = useState(true)
   const [tableData, setTableData] = useState([])
   
   const pathname = useLocation().pathname
@@ -29,16 +30,19 @@ export default function Table() {
     .then(result => {
       setTableData(result.data)
       setLoading(false)
+      setIsData(true)
     })
-    .catch(console.log)
+    .catch((e) => setIsData(false))
   }, [pathname, query])
 
   return(
     <>
-      
         <div className="table_div">
-        {loading && <FontAwesomeIcon icon={faSpinner} size={"5x"} pulse style={{marginTop: "60px"}} />}
-        {!loading && (
+        {isData? 
+        loading?<FontAwesomeIcon icon={faSpinner} size={"4x"} pulse />:null
+        :<><FontAwesomeIcon icon={faFileCircleXmark} size={"4x"} /><div className="div_text">No match data</div></>
+      }
+        {(!loading && isData) && (
           <table className="table_table">
             <thead className="table_thead">
               <tr>
