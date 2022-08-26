@@ -4,6 +4,8 @@
   overflow: auto;
   margin-left: 10vw;
   margin-right: 10vw;
+  padding-top: 2vh;
+  padding-bottom: 2vh;
 }
 
 .table_div::-webkit-scrollbar {
@@ -25,7 +27,7 @@
 
 .table_thead {
   position: sticky;
-  top: 0px;
+  top: -2vh;
 }
 
 .table_th {
@@ -38,4 +40,9 @@
   border-bottom: 1px solid;
   padding: 10px;
   text-align: center;
+}
+
+.div_text {
+  text-align: center;
+  font-size: large;
 }
