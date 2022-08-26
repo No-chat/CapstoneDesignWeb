@@ -44,10 +44,10 @@ export default function MainPage() {
     <>
       <header></header>
       <nav className="main_nav">
-        <FontAwesomeIcon icon={faList} onClick={showFilter} size={"3x"} className='btn' />
-        {isShowFilter && <NavBar />}
-        <FontAwesomeIcon icon={faArrowRotateLeft} size={"3x"} onClick={reload} className='btn' />
+        <FontAwesomeIcon icon={faList} onClick={showFilter} size={"3x"} className='btn left_margin_btn' />
+        <FontAwesomeIcon icon={faArrowRotateLeft} size={"3x"} onClick={reload} className='btn right_margin_btn' />
       </nav>
+      {isShowFilter && <NavBar />}
       <main className="main_main">
         <div className='main_div'>{'최근 업데이트: '+makeDateFormat(new Date())}</div>  
         <Table />
